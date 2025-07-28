@@ -1650,8 +1650,6 @@ async function TikTokGift(data) {
 	AddMessageItem(instance, data.msgId, 'tiktok', data.userId);
 }
 
-
-
 async function TikTokSubscribe(data) {
 	if (!showTikTokSubs)
 		return;
@@ -1682,7 +1680,32 @@ async function TikTokSubscribe(data) {
 	AddMessageItem(instance, data.msgId, 'tiktok', data.userId);
 }
 
+async function TikTokSubscribe(data) {
+	if (!showTikTokSubs)
+		return;
 
+	let username = data.nickname;
+
+	const message = `${username} subscribed for ${data.subMonth} months`;
+
+	ShowAlert(message, 'tiktok');
+}
+
+async function TikTokFollow(data) {
+	if (!showTikTokFollow)
+		return;
+
+	// Set the text
+	const username = data.nickname;
+	const tiktokIcon = `<img src="icons/platforms/tiktok.png" class="platform"/>`;
+
+	// Render avatars
+	const avatarURL = data.profilePictureUrl;
+
+	const message = `${avatarURL} ${username} Followed!`;
+
+	ShowAlert(message, 'tiktok');
+}
 
 //////////////////////
 // HELPER FUNCTIONS //
