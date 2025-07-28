@@ -1621,7 +1621,7 @@ async function TikTokFollow(data) {
 		return;
 	
 	const username = data.nickname;
-	const avatarImg = `<img src=${data.profilePictureUrl} class="platform"/>`;
+	const avatarImg = `<img src="${data.profilePictureUrl}" class="platform avatar-rounded"/>`;
 	
 	const message = `${avatarImg} ${username} Followed!`;
 
