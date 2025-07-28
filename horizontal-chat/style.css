@@ -147,7 +147,6 @@ li {
 	border-radius: 50%
 	object-fit: cover;         /* Crop to fill the circle */
 	overflow: hidden;          /* Ensure no overflow outside the circle */
-	display: inline-block;     /* Just in case */
 }
 
 .timestamp,
