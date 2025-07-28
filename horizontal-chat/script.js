@@ -69,7 +69,7 @@ const showYouTubeMemberships = GetBooleanParam("showYouTubeMemberships", true);
 
 const enableTikTokSupport = GetBooleanParam("enableTikTokSupport", true);
 const showTikTokFollows = GetBooleanParam("showTikTokFollows", true);
-const showTikTokLikes = GetBooleanParam("showTikTokLikes", true);
+const showTikTokShare = GetBooleanParam("showTikTokShare", true);
 const showTikTokMessages = GetBooleanParam("showTikTokMessages", true);
 const showTikTokGifts = GetBooleanParam("showTikTokGifts", true);
 const showTikTokSubs = GetBooleanParam("showTikTokSubs", true);
@@ -428,8 +428,13 @@ function TikfinityConnect() {
 			case 'gift':
 				TikTokGift(data);
 				break;
+				
 			case 'subscribe':
 				TikTokSubscribe(data);
+				break;
+				
+			case 'share':
+				TikTokShare(data);
 				break;
 		}
 	}
@@ -1532,132 +1537,6 @@ async function TikTokChat(data) {
 	AddMessageItem(instance, data.msgId, 'tiktok', data.userId);
 }
 
-
-async function TikTokLikes(data) {
-	if (!showTikTokLikes)
-		return;
-
-	// Get the total number of likes
-	let likeCountTotal = parseInt(data.likeCount);
-
-	// Search for previous likes from the same user
-	const previousLikeContainer = document.querySelector(`li[data-user-id="${data.userId}"]`);
-
-	// If found, fetch the previous count, add to current, and remove old element
-	if (previousLikeContainer) {
-		const likeCountElem = previousLikeContainer.querySelector('#tiktok-gift-repeat-count');
-		if (likeCountElem) {
-			const likeCountPrev = parseInt(likeCountElem.textContent.replace('x', '')) || 0;
-			likeCountTotal = likeCountPrev + likeCountTotal;
-			previousLikeContainer.remove();
-		}
-	}
-
-	// Get a reference to the template
-	const template = document.getElementById('messageTemplate');
-
-	// Create a new instance of the template
-	const instance = template.content.cloneNode(true);
-
-	// Get divs
-	const messageContainerDiv = instance.querySelector("#messageContainer");
-	const userInfoDiv = instance.querySelector("#userInfo");
-	const avatarDiv = instance.querySelector("#avatar");
-	const timestampDiv = instance.querySelector("#timestamp");
-	const platformDiv = instance.querySelector("#platform");
-	const badgeListDiv = instance.querySelector("#badgeList");
-	const usernameDiv = instance.querySelector("#username");
-	const messageDiv = instance.querySelector("#message");
-	const giftNameSpan = instance.querySelector("#tiktok-gift-name");
-	const repeatCountDiv = instance.querySelector("#tiktok-gift-repeat-count");
-	const stickerImg = instance.querySelector(".tiktok-gift-sticker");
-	const avatarImg = instance.querySelector(".tiktok-gift-avatar");
-
-	// Render chat bubble (optional: if you want to apply styles like TikTokChat)
-	if (useChatBubbles) {
-		const opacity255 = Math.round(parseFloat(bubbleOpacity) * 255);
-		let hexOpacity = opacity255.toString(16);
-		if (hexOpacity.length < 2) hexOpacity = "0" + hexOpacity;
-		document.documentElement.style.setProperty('--bubble-color', `${bubbleColor}${hexOpacity}`);
-		messageContainerDiv.classList.add("bubble");
-	}
-
-	// Set timestamp
-	if (showTimestamps) {
-		timestampDiv.classList.add("timestamp");
-		timestampDiv.innerText = GetCurrentTimeFormatted();
-	}
-
-	// Set username
-	if (showUsername) {
-		usernameDiv.innerText = data.nickname;
-		usernameDiv.style.color = '#9e9e9e';
-	}
-
-	// Set message content
-	if (showMessage) {
-		messageDiv.innerText = 'sent Likes';
-	}
-
-	// Set gift name and count
-	giftNameSpan.innerText = 'Likes';
-	repeatCountDiv.innerText = `x${likeCountTotal}`;
-
-	// Set avatar
-	if (showAvatar) {
-		const avatar = new Image();
-		avatar.src = data.profilePictureUrl;
-		avatar.classList.add("avatar");
-		avatarDiv.appendChild(avatar);
-		avatarImg.src = data.profilePictureUrl;
-	}
-
-	// Set sticker (if any; empty string used here)
-	stickerImg.src = '';
-
-	// Show platform
-	if (showPlatform) {
-		const platformElements = `<img src="icons/platforms/tiktok.png" class="platform"/>`;
-		platformDiv.innerHTML = platformElements;
-	}
-
-	// Render badges (if desired, similar to TikTokChat)
-	if (showBadges) {
-		badgeListDiv.innerHTML = "";
-
-		if (data.isModerator) {
-			const badge = new Image();
-			badge.src = `icons/badges/youtube-moderator.svg`;
-			badge.style.filter = `invert(100%)`;
-			badge.style.opacity = 0.8;
-			badge.classList.add("badge");
-			badgeListDiv.appendChild(badge);
-		}
-
-		for (const badgeData of data.userBadges) {
-			if (badgeData.type === 'image') {
-				const badge = new Image();
-				badge.src = badgeData.url;
-				badge.classList.add("badge");
-				badgeListDiv.appendChild(badge);
-			}
-		}
-	}
-
-	// Hide the header if the same user sends consecutive likes
-	const messageList = document.getElementById("messageList");
-	if (groupConsecutiveMessages && messageList.children.length > 0) {
-		const lastPlatform = messageList.lastChild.dataset.platform;
-		const lastUserId = messageList.lastChild.dataset.userId;
-		if (lastPlatform == "tiktok" && lastUserId == data.userId)
-			userInfoDiv.style.display = "none";
-	}
-
-	// Add the message to the list
-	AddMessageItem(instance, data.msgId, 'tiktok', data.userId);
-}
-
-
 async function TikTokGift(data) {
 	if (!showTikTokGifts)
 		return;
@@ -1697,6 +1576,18 @@ async function TikTokFollow(data) {
 	const avatarImg = `<img src="${data.profilePictureUrl}" class="platform avatar-rounded"/>`;
 	
 	const message = `${avatarImg} ${username} Followed!`;
+
+	ShowAlert(message, 'tiktok');
+}
+
+async function TikTokShare(data) {
+	if (!showTikTokShare)
+		return;
+	
+	const username = data.nickname;
+	const avatarImg = `<img src="${data.profilePictureUrl}" class="platform avatar-rounded"/>`;
+	
+	const message = `${avatarImg} ${username} shared the live!`;
 
 	ShowAlert(message, 'tiktok');
 }
