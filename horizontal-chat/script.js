@@ -1632,12 +1632,12 @@ async function TikTokSubscribe(data) {
 }
 
 async function TikTokFollow(data) {
-	if (!showTikTokFollow)
+	if (!showTikTokFollows)
 		return;
 
 	// Set the text
-	let username = data.nickname;
-	const tiktokIcon = `<img src="icons/platforms/tiktok.png" class="platform"/>`;
+	const username = data.nickname;
+	//const tiktokIcon = `<img src="icons/platforms/tiktok.png" class="platform"/>`;
 
 	// Render avatars
 	//let avatarURL = data.profilePictureUrl;
