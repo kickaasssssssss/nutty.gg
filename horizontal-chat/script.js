@@ -1787,6 +1787,22 @@ async function GetPronouns(platform, username) {
 	}
 }
 
+function IsImageUrl(url) {
+	try {
+		const { pathname } = new URL(url);
+		// Only check the pathname since query parameters are not included in it.
+		return /\.(png|jpe?g|webp|gif)$/i.test(pathname);
+	} catch (error) {
+		// Return false if the URL is invalid.
+		return false;
+	}
+}
+
+function ExtractYouTubeVideoId(url) {
+	const match = url.match(youtubeRegex);
+	return match ? match[1] : null;
+}
+
 function AddMessageItem(element, elementID, platform, userId) {
 	// Calculate the height of the div before inserting
 	const tempDiv = document.getElementById('IPutThisHereSoICanCalculateHowBigEachMessageIsSupposedToBeBeforeIAddItToTheMessageList');
@@ -1834,6 +1850,12 @@ function AddMessageItem(element, elementID, platform, userId) {
 		}
 
 	}, 200);
+}
+
+function DecodeHTMLString(html) {
+	var txt = document.createElement("textarea");
+	txt.innerHTML = html;
+	return txt.value;
 }
 
 // I used Gemini for this shit so if it doesn't work, blame Google
