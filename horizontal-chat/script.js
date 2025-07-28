@@ -1557,7 +1557,7 @@ function TikTokFollow(data) {
 	const tiktokIcon = `<img src="icons/platforms/tiktok.png" class="platform"/>`;
 
 	titleDiv.innerHTML = `${tiktokIcon} ${user} followed`;
-
+	
 	AddMessageItem(instance, data.msgId, 'tiktok', data.userId);
 }
 
