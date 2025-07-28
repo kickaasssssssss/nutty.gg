@@ -1532,36 +1532,6 @@ async function TikTokChat(data) {
 	AddMessageItem(instance, data.msgId, 'tiktok', data.userId);
 }
 
-async function TikTokFollow(data) {
-	if (!showTikTokFollows)
-		return;
-
-	// Get a reference to the template
-	const template = document.getElementById('cardTemplate');
-
-	// Create a new instance of the template
-	const instance = template.content.cloneNode(true);
-
-	// Get divs
-	const cardDiv = instance.querySelector("#card");
-	const headerDiv = instance.querySelector("#header");
-	const avatarDiv = instance.querySelector("#avatar");
-	const iconDiv = instance.querySelector("#icon");
-	const titleDiv = instance.querySelector("#title");
-	const contentDiv = instance.querySelector("#content");
-
-	// Set the card background colors
-	cardDiv.classList.add('tiktok');
-
-	const user = data.nickname;
-	const tiktokIcon = `<img src="icons/platforms/tiktok.png" class="platform"/>`;
-
-	titleDiv.innerHTML = `${tiktokIcon} ${user} followed`;
-	
-	AddMessageItem(instance, data.msgId, 'tiktok', data.userId);
-}
-
-
 /*
 *
 * Note to Nutty:
@@ -1646,36 +1616,6 @@ async function TikTokGift(data) {
 	giftNameSpan.innerText = data.giftName;				// Set the gift name
 	stickerImg.src = data.giftPictureUrl;				// Set the sticker image URL
 	repeatCountDiv.innerText = `x${data.repeatCount}`;	// Set the number of gifts sent
-
-	AddMessageItem(instance, data.msgId, 'tiktok', data.userId);
-}
-
-async function TikTokSubscribe(data) {
-	if (!showTikTokSubs)
-		return;
-
-	// Get a reference to the template
-	const template = document.getElementById('cardTemplate');
-
-	// Create a new instance of the template
-	const instance = template.content.cloneNode(true);
-
-	// Get divs
-	const cardDiv = instance.querySelector("#card");
-	const headerDiv = instance.querySelector("#header");
-	const avatarDiv = instance.querySelector("#avatar");
-	const iconDiv = instance.querySelector("#icon");
-	const titleDiv = instance.querySelector("#title");
-	const contentDiv = instance.querySelector("#content");
-
-	// Set the card background colors
-	cardDiv.classList.add('tiktok');
-
-	const user = data.nickname;
-	const tiktokIcon = `<img src="icons/platforms/tiktok.png" class="platform"/>`;
-
-	//titleDiv.innerHTML = `${tiktokIcon} ${user} subscribed on TikTok`;
-	titleDiv.innerHTML = `${tiktokIcon} ${user} subscribed for ${data.subMonth} months`;
 
 	AddMessageItem(instance, data.msgId, 'tiktok', data.userId);
 }
