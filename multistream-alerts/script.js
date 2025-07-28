@@ -1376,7 +1376,7 @@ async function TikTokGift(data) {
 	if (!showTikTokGifts)
 		return;
 
-	if (!data.repeatEnd) {
+	if (!data.comboEnd) {
 		// Combo still in progress, ignore for now
 		return;
 	}
