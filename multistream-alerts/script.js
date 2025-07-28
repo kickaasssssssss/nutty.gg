@@ -1383,7 +1383,8 @@ async function TikTokGift(data) {
 	
 	// Render avatars
 	const avatarURL = data.profilePictureUrl;
-
+	
+if (data.giftType === 1 && !data.repeatEnd) {
 	UpdateAlertBox(
 		'tiktok',
 		avatarURL,
@@ -1395,6 +1396,8 @@ async function TikTokGift(data) {
 		tiktokGiftAction,
 		data
 	);
+		return;
+}
 }
 
 async function TikTokSubscribe(data) {
