@@ -1598,26 +1598,11 @@ async function TikTokGift(data) {
 	// Streak ended or non-streakable gift => process the gift with final repeat_count
 	console.debug(`${data.uniqueId} has sent gift ${data.giftName} x${data.repeatCount}`);
 
-	// Get a reference to the template
-	const template = document.getElementById('tiktok-gift-template');
+	const giftImg = `<img src=${data.giftPictureUrl} class="platform"/>`;
 
-	// Create a new instance of the template
-	const instance = template.content.cloneNode(true);
+	const message = `${data.nickname} sent ${giftImg}x${data.repeatCount}`;
 
-	// Get divs
-	const avatarImg = instance.querySelector('.tiktok-gift-avatar');
-	const usernameSpan = instance.querySelector('#tiktok-gift-username');
-	const giftNameSpan = instance.querySelector('#tiktok-gift-name');
-	const stickerImg = instance.querySelector('.tiktok-gift-sticker');
-	const repeatCountDiv = instance.querySelector('#tiktok-gift-repeat-count');
-
-	avatarImg.src = data.profilePictureUrl;				// Set the card header
-	usernameSpan.innerText = data.nickname;				// Set the username
-	giftNameSpan.innerText = data.giftName;				// Set the gift name
-	stickerImg.src = data.giftPictureUrl;				// Set the sticker image URL
-	repeatCountDiv.innerText = `x${data.repeatCount}`;	// Set the number of gifts sent
-
-	AddMessageItem(instance, data.msgId, 'tiktok', data.userId);
+	ShowAlert(message, 'tiktok');
 }
 
 async function TikTokSubscribe(data) {
@@ -1634,15 +1619,10 @@ async function TikTokSubscribe(data) {
 async function TikTokFollow(data) {
 	if (!showTikTokFollows)
 		return;
-
-	// Set the text
+	
 	const username = data.nickname;
-	//const tiktokIcon = `<img src="icons/platforms/tiktok.png" class="platform"/>`;
-
-	// Render avatars
-	const avatarURL = data.profilePictureUrl;
-
-	const message = `${avatarURL} ${username} Followed!`;
+	
+	const message = `${username} Followed!`;
 
 	ShowAlert(message, 'tiktok');
 }
