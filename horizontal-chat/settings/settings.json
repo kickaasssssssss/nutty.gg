@@ -274,9 +274,9 @@
 			"group": "Which TikTok messages do you want to see?"
 		},
 		{
-			"id": "showTikTokLikes",
-			"label": "Likes",
-			"description": "Self-updating Likes",
+			"id": "showTikTokShare",
+			"label": "Share",
+			"description": "",
 			"type": "checkbox",
 			"defaultValue": true,
 			"showIf": "enableTikTokSupport",
