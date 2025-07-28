@@ -467,6 +467,24 @@
 			"group": "Which TikTok alerts do you want to see?"
 		},
 		{
+			"id": "showTikTokFollow",
+			"label": "New Followers",
+			"description": "",
+			"type": "checkbox",
+			"defaultValue": true,
+			"showIf": "enableTikTokSupport",
+			"group": "Which TikTok alerts do you want to see?"
+		},
+		{
+			"id": "tiktokFollowAction",
+			"label": "",
+			"description": "Also run this Streamer.bot Action",
+			"type": "sb-actions",
+			"defaultValue": "",
+			"showIf": "showTikTokFollow",
+			"group": "Which TikTok alerts do you want to see?"
+		},
+		{
 			"id": "showStreamlabsDonations",
 			"label": "Streamlabs Tips",
 			"description": "<a href=\"https://docs.streamer.bot/guide/integrations/streamlabs\" target=\"_blank\">Click to connect</a>",
