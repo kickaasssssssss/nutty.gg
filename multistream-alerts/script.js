@@ -1376,29 +1376,29 @@ async function TikTokGift(data) {
 	if (!showTikTokGifts)
 		return;
 
-	// Set the text
-	const username = data.nickname;
-	const tiktokIcon = `<img src="icons/platforms/tiktok.png" class="platform"/>`;
-	const giftImg = `<img src=${data.giftPictureUrl} style="height: 1em"/>`;
-	
-	// Render avatars
-	const avatarURL = data.profilePictureUrl;
-	
-if (data.giftType === 1 && !data.repeatEnd) {
+	if (!data.repeatEnd) {
+		// Combo still in progress, ignore for now
+		return;
+	}
+
+	const username = data.nickname || 'Unknown User';
+	const tiktokIcon = `<img src="icons/platforms/tiktok.png" class="platform" alt="TikTok"/>`;
+	const giftImg = `<img src="${data.giftPictureUrl}" style="height: 1em" alt="Gift"/>`;
+	const avatarURL = data.profilePictureUrl || 'default-avatar.png';
+
 	UpdateAlertBox(
 		'tiktok',
 		avatarURL,
-		`${username}`,
-		`sent ${giftImg}x${data.repeatCount}`,
+		username,
+		`sent ${giftImg} x${data.repeatCount}`,
 		'',
 		username,
 		'',
 		tiktokGiftAction,
 		data
 	);
-		return;
 }
-}
+
 
 async function TikTokSubscribe(data) {
 	if (!showTikTokSubs)
