@@ -1600,7 +1600,7 @@ async function TikTokGift(data) {
 
 	const giftImg = `<img src=${data.giftPictureUrl} class="platform"/>`;
 	const avatarImg = `<img src="${data.profilePictureUrl}" class="platform avatar-rounded"/>`;
-	const message = `${avatarImg} ${data.nickname} sent ${giftImg}x${data.repeatCount}`;
+	const message = `${avatarImg} ${data.nickname} sent ${giftImg} x${data.repeatCount}`;
 
 	ShowAlert(message, 'tiktok');
 }
