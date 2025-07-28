@@ -1599,8 +1599,8 @@ async function TikTokGift(data) {
 	console.debug(`${data.uniqueId} has sent gift ${data.giftName} x${data.repeatCount}`);
 
 	const giftImg = `<img src=${data.giftPictureUrl} class="platform"/>`;
-
-	const message = `${data.nickname} sent ${giftImg}x${data.repeatCount}`;
+	const avatarImg = `<img src="${data.profilePictureUrl}" class="platform avatar-rounded"/>`;
+	const message = `${avatarImg} ${data.nickname} sent ${giftImg}x${data.repeatCount}`;
 
 	ShowAlert(message, 'tiktok');
 }
@@ -1610,8 +1610,8 @@ async function TikTokSubscribe(data) {
 		return;
 
 	let username = data.nickname;
-
-	const message = `${username} subscribed for ${data.subMonth} months`;
+	const avatarImg = `<img src="${data.profilePictureUrl}" class="platform avatar-rounded"/>`;
+	const message = `${avatarImg} ${username} subscribed for ${data.subMonth} months`;
 
 	ShowAlert(message, 'tiktok');
 }
