@@ -1521,18 +1521,18 @@ async function TikTokChat(data) {
 	}
 
 	// Hide the header if the same username sends a message twice in a row
-	//const messageList = document.getElementById("messageList");
-	//if (groupConsecutiveMessages && messageList.children.length > 0) {
-		//const lastPlatform = messageList.lastChild.dataset.platform;
-		//const lastUserId = messageList.lastChild.dataset.userId;
-		//if (lastPlatform == "tiktok" && lastUserId == data.userId)
-		//	userInfoDiv.style.display = "none";
-	//}
+	const messageList = document.getElementById("messageList");
+	if (groupConsecutiveMessages && messageList.children.length > 0) {
+		const lastPlatform = messageList.lastChild.dataset.platform;
+		const lastUserId = messageList.lastChild.dataset.userId;
+		if (lastPlatform == "tiktok" && lastUserId == data.userId)
+			userInfoDiv.style.display = "none";
+	}
 
 	AddMessageItem(instance, data.msgId, 'tiktok', data.userId);
 }
 
-function TikTokFollow(data) {
+async function TikTokFollow(data) {
 	if (!showTikTokFollows)
 		return;
 
@@ -1571,7 +1571,7 @@ function TikTokFollow(data) {
 *
 */
 
-function TikTokLikes(data) {
+async function TikTokLikes(data) {
 	if (!showTikTokLikes)
 		return;
 
@@ -1615,7 +1615,7 @@ function TikTokLikes(data) {
 	AddMessageItem(instance, data.msgId, 'tiktok', data.userId);
 }
 
-function TikTokGift(data) {
+async function TikTokGift(data) {
 	if (!showTikTokGifts)
 		return;
 
@@ -1652,7 +1652,7 @@ function TikTokGift(data) {
 
 
 
-function TikTokSubscribe(data) {
+async function TikTokSubscribe(data) {
 	if (!showTikTokSubs)
 		return;
 
