@@ -92,6 +92,8 @@ const showTikTokGifts = GetBooleanParam("showTikTokGifts", true);
 const tiktokGiftAction = urlParams.get("tiktokGiftAction") || "";
 const showTikTokSubs = GetBooleanParam("showTikTokSubs", true);
 const tiktokSubAction = urlParams.get("tiktokSubAction") || "";
+const showTikTokFollow = GetBooleanParam("showTikTokFollow", true);
+const tiktokFollowAction = urlParams.get("tiktokFollowAction") || "";
 
 // Which donation alerts do you want to see?
 const showStreamlabsDonations = GetBooleanParam("showStreamlabsDonations", false);
@@ -424,6 +426,9 @@ function TikfinityConnect() {
 				break;
 			case 'subscribe':
 				TikTokSubscribe(data);
+				break;
+			case 'follow':
+				TikTokFollow(data);
 				break;
 		}
 	}
@@ -1407,7 +1412,7 @@ async function TikTokSubscribe(data) {
 		'tiktok',
 		avatarURL,
 		`${username}`,
-		`subscribed on TikTok`,
+		`subscribed for ${data.subMonth} months`,
 		'',
 		username,
 		'',
@@ -1416,6 +1421,29 @@ async function TikTokSubscribe(data) {
 	);
 }
 
+async function TikTokFollow(data) {
+	if (!showTikTokFollow)
+		return;
+
+	// Set the text
+	const username = data.nickname;
+	const tiktokIcon = `<img src="icons/platforms/tiktok.png" class="platform"/>`;
+	
+	// Render avatars
+	const avatarURL = data.profilePictureUrl;
+	
+	UpdateAlertBox(
+		'tiktok',
+		avatarURL,
+		`${username}`,
+		`Followed!`,
+		'',
+		username,
+		'',
+		tiktokFollowAction,
+		data
+	);
+}
 
 
 //////////////////////
