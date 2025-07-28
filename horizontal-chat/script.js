@@ -1532,14 +1532,6 @@ async function TikTokChat(data) {
 	AddMessageItem(instance, data.msgId, 'tiktok', data.userId);
 }
 
-/*
-*
-* Note to Nutty:
-* TikFinity only exposes the Like Count in batches of 15 at a time. >:(
-* So basically this code will get the latest element and adds the like count to it
-* and re-render them, preventing the "flood" it would otherwise cause.
-*
-*/
 
 function TikTokLikes(data) {
 	if (!showTikTokLikes)
@@ -1564,7 +1556,7 @@ function TikTokLikes(data) {
 	}
 
 	// Get a reference to the template
-	const template = document.getElementById('tiktok-gift-template');
+	const template = document.getElementById('messageTemplate');
 
 	// Create a new instance of the template
 	const instance = template.content.cloneNode(true);
