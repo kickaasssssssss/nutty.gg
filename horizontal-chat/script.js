@@ -1551,7 +1551,7 @@ async function TikTokGift(data) {
 	console.debug(`${data.uniqueId} has sent gift ${data.giftName} x${data.repeatCount}`);
 
 	const giftImg = `<img src=${data.giftPictureUrl} class="platform"/>`;
-	const avatarImg = `<img src="${data.profilePictureUrl}" class="platform avatar-rounded"/>`;
+	const avatarImg = `<img src="${data.profilePictureUrl}" class="avatar"/>`;
 	const message = `${avatarImg} ${data.nickname} sent ${giftImg} x${data.repeatCount}`;
 
 	ShowAlert(message, 'tiktok');
@@ -1562,7 +1562,7 @@ async function TikTokSubscribe(data) {
 		return;
 
 	let username = data.nickname;
-	const avatarImg = `<img src="${data.profilePictureUrl}" class="platform avatar-rounded"/>`;
+	const avatarImg = `<img src="${data.profilePictureUrl}" class="avatar"/>`;
 	const message = `${avatarImg} ${username} subscribed for ${data.subMonth} months`;
 
 	ShowAlert(message, 'tiktok');
@@ -1573,7 +1573,7 @@ async function TikTokFollow(data) {
 		return;
 	
 	const username = data.nickname;
-	const avatarImg = `<img src="${data.profilePictureUrl}" class="platform avatar-rounded"/>`;
+	const avatarImg = `<img src="${data.profilePictureUrl}" class="avatar"/>`;
 	
 	const message = `${avatarImg} ${username} Followed!`;
 
@@ -1585,8 +1585,8 @@ async function TikTokShare(data) {
 		return;
 	
 	const username = data.nickname;
-	const avatarImg = `<img src="${data.profilePictureUrl}" class="platform avatar-rounded"/>`;
-	
+	//const avatarImg = `<img src="${data.profilePictureUrl}" class="platform avatar-rounded"/>`;
+	const avatarImg = `<img src="${data.profilePictureUrl}" class="avatar"/>`;
 	const message = `${avatarImg} ${username} shared the live!`;
 
 	ShowAlert(message, 'tiktok');
