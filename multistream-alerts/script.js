@@ -1401,7 +1401,7 @@ async function TikTokSubscribe(data) {
 	const tiktokIcon = `<img src="icons/platforms/tiktok.png" class="platform"/>`;
 	
 	// Render avatars
-	const avatarURL = 'icons/platforms/tiktok.png';
+	const avatarURL = data.profilePictureUrl;
 	
 	UpdateAlertBox(
 		'tiktok',
