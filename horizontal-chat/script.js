@@ -1541,7 +1541,7 @@ async function TikTokChat(data) {
 *
 */
 
-async function TikTokLikes(data) {
+function TikTokLikes(data) {
 	if (!showTikTokLikes)
 		return;
 
