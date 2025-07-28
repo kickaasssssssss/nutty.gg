@@ -1640,9 +1640,9 @@ async function TikTokFollow(data) {
 	//const tiktokIcon = `<img src="icons/platforms/tiktok.png" class="platform"/>`;
 
 	// Render avatars
-	//let avatarURL = data.profilePictureUrl;
+	const avatarURL = data.profilePictureUrl;
 
-	const message = `${username} Followed!`;
+	const message = `${avatarURL} ${username} Followed!`;
 
 	ShowAlert(message, 'tiktok');
 }
