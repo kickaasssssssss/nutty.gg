@@ -10,7 +10,7 @@ const sbServerPort = urlParams.get("port") || "8080";
 const minimumRole = 2;							// 1 - Viewer, 2 - VIP, 3 - Moderator, 4 - Broadcaster
 const avatarMap = new Map();
 const pronounMap = new Map();
-const animationDuration = 8000;
+const animationDuration = 6000;
 let widgetLocked = false;						// Needed to lock animation from overlapping
 let alertQueue = [];
 
