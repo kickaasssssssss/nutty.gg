@@ -2672,7 +2672,7 @@ function TikTokFollow(data) {
 	cardDiv.classList.add('tiktok');
 
 	const user = data.nickname;
-	const avatarImg = `<img src="${data.profilePictureUrl}" class="avatar"/>`;
+	const avatarImg = `<img src="${data.profilePictureUrl}" class="platform"/>`;
 
 	titleDiv.innerHTML = `${avatarImg} ${user} followed`;
 
@@ -2790,7 +2790,7 @@ function TikTokSubscribe(data) {
 	cardDiv.classList.add('tiktok');
 
 	const user = data.nickname;
-	const avatarImg = `<img src="${data.profilePictureUrl}" class="avatar"/>`;
+	const avatarImg = `<img src="${data.profilePictureUrl}" class="platform"/>`;
 
 	//titleDiv.innerHTML = `${tiktokIcon} ${user} subscribed on TikTok`;
 	titleDiv.innerHTML = `${avatarImg} ${user} subscribed for ${data.subMonth} months`;
@@ -2820,7 +2820,7 @@ function TikTokShare(data) {
 	cardDiv.classList.add('tiktok');
 
 	const user = data.nickname;
-	const avatarImg = `<img src="${data.profilePictureUrl}" class="avatar"/>`;
+	const avatarImg = `<img src="${data.profilePictureUrl}" class="platform"/>`;
 
 	titleDiv.innerHTML = `${avatarImg} ${user} shared the live!`;
 
