@@ -137,7 +137,8 @@ li {
 }
 
 .avatar-alert{
-	height: 1em;
+	width: 2em;                /* Set width equal to height */
+    	height: 2em;
 	margin: 1px;
 	transform: translate(0px, 0.25em);
 	border-radius: 50%
