@@ -430,15 +430,6 @@
 			"group": "Which TikTok messages do you want to see?"
 		},
 		{
-			"id": "showTikTokShare",
-			"label": "Share",
-			"description": "",
-			"type": "checkbox",
-			"defaultValue": true,
-			"showIf": "enableTikTokSupport",
-			"group": "Which TikTok messages do you want to see?"
-		},
-		{
 			"id": "showStreamlabsDonations",
 			"label": "Streamlabs Tips",
 			"description": "<a href=\"https://docs.streamer.bot/guide/integrations/streamlabs\" target=\"_blank\">Click to connect</a>",
@@ -513,3 +504,4 @@
 	]
 
 }
+
