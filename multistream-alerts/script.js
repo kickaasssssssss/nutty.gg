@@ -1382,9 +1382,12 @@ async function TikTokGift(data) {
 		return;
 	}
 
+	// Streak ended or non-streakable gift => process the gift with final repeat_count
+	console.debug(`${data.uniqueId} has sent gift ${data.giftName} x${data.repeatCount}`);
+
 	const username = data.nickname || 'Unknown User';
-	const tiktokIcon = `<img src="icons/platforms/tiktok.png" class="platform"/>`;
-	const giftImg = `<img src="${data.giftPictureUrl}" style="height: 1em"/>`;
+	const tiktokIcon = `<img src="icons/platforms/tiktok.png" class="platform" alt="TikTok"/>`;
+	const giftImg = `<img src="${data.giftPictureUrl}" style="height: 1em" alt="Gift"/>`;
 	const avatarURL = data.profilePictureUrl || 'default-avatar.png';
 
 	UpdateAlertBox(
@@ -1399,7 +1402,6 @@ async function TikTokGift(data) {
 		data
 	);
 }
-
 
 async function TikTokSubscribe(data) {
 	if (!showTikTokSubs)
