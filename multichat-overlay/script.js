@@ -406,7 +406,7 @@ function TikfinityConnect() {
 	
 	if (tikfinityWebsocket) return; // Already connected
 
-	tikfinityWebsocket = new WebSocket("ws://localhost:21213/");
+	tikfinityWebsocket = new WebSocket("ws://localhost:62024/");
 
 	tikfinityWebsocket.onopen = function () {
 		console.log(`TikFinity successfully connected...`)
