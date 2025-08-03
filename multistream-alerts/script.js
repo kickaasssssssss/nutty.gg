@@ -1376,8 +1376,9 @@ async function TikTokGift(data) {
 	if (!showTikTokGifts)
 		return;
 
-	if (!data.comboEnd) {
-		// Combo still in progress, ignore for now
+	if (data.giftType === 1 && !data.repeatEnd) {
+		// Streak in progress => show only temporary
+		console.debug(`${data.uniqueId} is sending gift ${data.giftName} x${data.repeatCount}`);
 		return;
 	}
 
