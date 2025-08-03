@@ -1382,8 +1382,8 @@ async function TikTokGift(data) {
 	}
 
 	const username = data.nickname || 'Unknown User';
-	const tiktokIcon = `<img src="icons/platforms/tiktok.png" class="platform" alt="TikTok"/>`;
-	const giftImg = `<img src="${data.giftPictureUrl}" style="height: 1em" alt="Gift"/>`;
+	const tiktokIcon = `<img src="icons/platforms/tiktok.png" class="platform"/>`;
+	const giftImg = `<img src="${data.giftPictureUrl}" style="height: 1em"/>`;
 	const avatarURL = data.profilePictureUrl || 'default-avatar.png';
 
 	UpdateAlertBox(
