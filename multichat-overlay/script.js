@@ -2672,9 +2672,9 @@ function TikTokFollow(data) {
 	cardDiv.classList.add('tiktok');
 
 	const user = data.nickname;
-	const avatarImg = `<img src="${data.profilePictureUrl}" class="avatar-alert"/>`;
+	const avatarImg = `<img src="${data.profilePictureUrl}" class="avatar-alert" />`;
 
-	titleDiv.innerHTML = `${avatarImg} ${user} followed`;
+	titleDiv.innerHTML = `${avatarImg} <span style="vertical-align: middle;">${user} followed</span>`;
 
 	AddMessageItem(instance, data.msgId, 'tiktok', data.userId);
 }
