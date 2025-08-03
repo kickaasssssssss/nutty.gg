@@ -73,6 +73,7 @@ const showTikTokLikes = GetBooleanParam("showTikTokLikes", true);
 const showTikTokMessages = GetBooleanParam("showTikTokMessages", true);
 const showTikTokGifts = GetBooleanParam("showTikTokGifts", true);
 const showTikTokSubs = GetBooleanParam("showTikTokSubs", true);
+const showTikTokSubs = GetBooleanParam("showTikTokShare", true);
 
 const showStreamlabsDonations = GetBooleanParam("showStreamlabsDonations", true)
 const showStreamElementsTips = GetBooleanParam("showStreamElementsTips", true);
