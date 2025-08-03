@@ -2679,35 +2679,6 @@ function TikTokFollow(data) {
 	AddMessageItem(instance, data.msgId, 'tiktok', data.userId);
 }
 
-function TikTokShare(data) {
-	if (!showTikTokShare)
-		return;
-
-	// Get a reference to the template
-	const template = document.getElementById('cardTemplate');
-
-	// Create a new instance of the template
-	const instance = template.content.cloneNode(true);
-
-	// Get divs
-	const cardDiv = instance.querySelector("#card");
-	const headerDiv = instance.querySelector("#header");
-	const avatarDiv = instance.querySelector("#avatar");
-	const iconDiv = instance.querySelector("#icon");
-	const titleDiv = instance.querySelector("#title");
-	const contentDiv = instance.querySelector("#content");
-
-	// Set the card background colors
-	cardDiv.classList.add('tiktok');
-
-	const user = data.nickname;
-	const avatarImg = `<img src="${data.profilePictureUrl}" class="avatar"/>`;
-
-	titleDiv.innerHTML = `${avatarImg} ${user} shared the live!`;
-
-	AddMessageItem(instance, data.msgId, 'tiktok', data.userId);
-}
-
 /*
 *
 * Note to Nutty:
