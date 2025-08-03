@@ -136,6 +136,13 @@ li {
     display: inline-block;     /* Just in case */
 }
 
+.avatar-alert{
+	height: 1em;
+	margin: 1px;
+	transform: translate(0px, 0.25em);
+	border-radius: 50%
+}
+
 .timestamp,
 .pronouns {
 	background: #adadad46;
