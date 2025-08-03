@@ -136,13 +136,22 @@ li {
     display: inline-block;     /* Just in case */
 }
 
-.avatar-alert{
-	width: 2em;                /* Set width equal to height */
+ /*.avatar-alert{
+	width: 2em;                
     	height: 2em;
 	margin: 1px;
 	transform: translate(0px, 0.25em);
 	border-radius: 50%
+}*/
+
+.avatar-alert {
+  vertical-align: middle;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-right: 6px;
 }
+
 
 .timestamp,
 .pronouns {
