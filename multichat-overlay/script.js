@@ -73,7 +73,6 @@ const showTikTokLikes = GetBooleanParam("showTikTokLikes", true);
 const showTikTokMessages = GetBooleanParam("showTikTokMessages", true);
 const showTikTokGifts = GetBooleanParam("showTikTokGifts", true);
 const showTikTokSubs = GetBooleanParam("showTikTokSubs", true);
-const showTikTokSubs = GetBooleanParam("showTikTokShare", true);
 
 const showStreamlabsDonations = GetBooleanParam("showStreamlabsDonations", true)
 const showStreamElementsTips = GetBooleanParam("showStreamElementsTips", true);
@@ -406,7 +405,7 @@ function TikfinityConnect() {
 	
 	if (tikfinityWebsocket) return; // Already connected
 
-	tikfinityWebsocket = new WebSocket("ws://localhost:62024/");
+	tikfinityWebsocket = new WebSocket("ws://localhost:21213/");
 
 	tikfinityWebsocket.onopen = function () {
 		console.log(`TikFinity successfully connected...`)
@@ -448,13 +447,8 @@ function TikfinityConnect() {
 			case 'gift':
 				TikTokGift(data);
 				break;
-				
 			case 'subscribe':
 				TikTokSubscribe(data);
-				break;
-				
-			case 'share':
-				TikTokShare(data);
 				break;
 		}
 	}
@@ -2672,12 +2666,13 @@ function TikTokFollow(data) {
 	cardDiv.classList.add('tiktok');
 
 	const user = data.nickname;
-	const avatarImg = `<img src="${data.profilePictureUrl}" class="avatar"/>`;
+	const tiktokIcon = `<img src="icons/platforms/tiktok.png" class="platform"/>`;
 
-	titleDiv.innerHTML = `${avatarImg} ${user} followed`;
+	titleDiv.innerHTML = `${tiktokIcon} ${user} followed`;
 
 	AddMessageItem(instance, data.msgId, 'tiktok', data.userId);
 }
+
 
 /*
 *
@@ -2791,10 +2786,10 @@ function TikTokSubscribe(data) {
 	cardDiv.classList.add('tiktok');
 
 	const user = data.nickname;
-	const avatarImg = `<img src="${data.profilePictureUrl}" class="avatar"/>`;
+	const tiktokIcon = `<img src="icons/platforms/tiktok.png" class="platform"/>`;
 
 	//titleDiv.innerHTML = `${tiktokIcon} ${user} subscribed on TikTok`;
-	titleDiv.innerHTML = `${avatarImg} ${user} subscribed for ${data.subMonth} months`;
+	titleDiv.innerHTML = `${tiktokIcon} ${user} subscribed for ${data.subMonth} months`;
 
 	AddMessageItem(instance, data.msgId, 'tiktok', data.userId);
 }
