@@ -593,7 +593,8 @@ async function CustomEvent(data) {
 	case ('tikfinity.gift'):
 	{
    	 if (data.repeatEnd === true) {
-        avatarEl.src = ConvertWEBPToPNG(data.profilePictureUrl);
+        // Show gift image instead of profile picture
+        avatarEl.src = data.giftPictureUrl;
 
         const messageEl = document.createElement('div');
         messageEl.innerHTML = `
@@ -603,11 +604,6 @@ async function CustomEvent(data) {
         `;
 
         contentEl.appendChild(messageEl);
-
-        const giftImg = document.createElement('img');
-        giftImg.src = data.giftPictureUrl;
-        giftImg.classList.add('gift-image');
-        contentEl.appendChild(giftImg);
 
         SetPlatformIcon(iconEl, 'tiktok');
     		}
