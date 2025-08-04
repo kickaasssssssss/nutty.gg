@@ -812,3 +812,4 @@ function Connect() {
         client.connect();
     }
 }
+}
