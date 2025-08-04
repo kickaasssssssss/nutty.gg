@@ -592,11 +592,16 @@ async function CustomEvent(data) {
             break;
 
 	case ('tikfinity.gift'):
-	{
-   	 if (data.repeatEnd === true) {
+{
+    if (data.repeatEnd === true) {
         // Show gift image instead of profile picture
         avatarEl.src = data.giftPictureUrl;
 
+        // Force square gift image with cover fit
+        avatarEl.style.width = '80px';
+        avatarEl.style.height = '80px';
+        avatarEl.style.objectFit = 'cover';
+       
         const messageEl = document.createElement('div');
         messageEl.innerHTML = `
             <b>${data.nickname}</b><br>
@@ -607,9 +612,10 @@ async function CustomEvent(data) {
         contentEl.appendChild(messageEl);
 
         SetPlatformIcon(iconEl, 'tiktok');
-    		}
-	}
-	break;
+    }
+}
+break;
+
 
             }
         }
