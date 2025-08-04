@@ -565,6 +565,19 @@ async function CustomEvent(data) {
                         SetPlatformIcon(iconEl, 'kick');
                     }
                     break;
+
+             case ('tikfinity.subscribe'):
+            {
+                avatarEl.src = ConvertWEBPToPNG(data.profilePictureUrl);
+
+                const messageEl = document.createElement('div');
+                messageEl.innerHTML = `<b>${data.nickname}</b><br>just subscribed to the host!`;
+
+                contentEl.appendChild(messageEl);
+                SetPlatformIcon(iconEl, 'tiktok'); // Or use a custom TikFinity icon
+            }
+            break;
+                    
             }
         }
         break;
