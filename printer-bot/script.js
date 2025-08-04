@@ -571,7 +571,11 @@ async function CustomEvent(data) {
                 avatarEl.src = ConvertWEBPToPNG(data.profilePictureUrl);
 
                 const messageEl = document.createElement('div');
-                messageEl.innerHTML = `<b>${data.nickname}</b><br>just subscribed to the host!`;
+                messageEl.innerHTML = `
+				<b>${nickname}</b><br>
+				just subscribed for<br>
+				<b>${subMonth} month${subMonth > 1 ? 's' : ''}!</b>
+			`.trim();
 
                 contentEl.appendChild(messageEl);
                 SetPlatformIcon(iconEl, 'tiktok'); // Or use a custom TikFinity icon
