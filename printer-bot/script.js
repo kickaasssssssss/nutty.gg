@@ -592,24 +592,24 @@ async function CustomEvent(data) {
             break;
 
 	case ('tikfinity.gift'):
-	{
-   	 if (data.repeatEnd === true) {
-        // Show gift image instead of profile picture
-        avatarEl.src = data.giftPictureUrl;
+{
+  	 if (data.repeatEnd === true) {
+    // Show gift image instead of profile picture
+    avatarEl.src = data.giftPictureUrl;
 
-        const messageEl = document.createElement('div');
-        messageEl.innerHTML = 
-            <b>${data.nickname}</b><br>
-            sent <b>${data.giftName}</b> 
-            <span style="font-size: 1.2em;">×${data.repeatCount}</span>
-        ;
+    const messageEl = document.createElement('div');
+    messageEl.innerHTML = `
+        <b>${data.nickname}</b><br>
+        sent <b>${data.giftName}</b> 
+        <span style="font-size: 1.2em;">×${data.repeatCount}</span>
+    `;
 
-        contentEl.appendChild(messageEl);
+    contentEl.appendChild(messageEl);
 
-        SetPlatformIcon(iconEl, 'tiktok');
-    		}
-	}
-	break;
+    SetPlatformIcon(iconEl, 'tiktok');
+   		}
+}
+break;
 
             }
         }
