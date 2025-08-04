@@ -568,14 +568,22 @@ async function CustomEvent(data) {
 
              case ('tikfinity.subscribe'):
             {
-		if (data.msgId === lastMsgId) return; // Ignore duplicate
-        	lastMsgId = data.msgId;
-		    
-                avatarEl.src = ConvertWEBPToPNG(data.profilePictureUrl);
+		avatarEl.src = ConvertWEBPToPNG(data.profilePictureUrl);
 		const subMonth = parseInt(data.subMonth) || 1;
 
                 const messageEl = document.createElement('div');
                 messageEl.innerHTML = `<b>${data.nickname}</b><br>just subscribed for<br><b>${subMonth} month${subMonth > 1 ? 's' : ''}!</b>`;
+
+                contentEl.appendChild(messageEl);
+                SetPlatformIcon(iconEl, 'tiktok'); // Or use a custom TikFinity icon
+            }
+            break;
+
+		case ('tikfinity.follow'):
+            {
+		avatarEl.src = ConvertWEBPToPNG(data.profilePictureUrl);
+		const messageEl = document.createElement('div');
+                messageEl.innerHTML = `<b>${data.nickname}</b><br>Followed the host!`;
 
                 contentEl.appendChild(messageEl);
                 SetPlatformIcon(iconEl, 'tiktok'); // Or use a custom TikFinity icon
