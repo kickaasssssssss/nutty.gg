@@ -21,10 +21,11 @@ const avatarMap = new Map();
 
 
 
-///////////////////////////
+/////////////////////////
 // STREAMER.BOT CLIENT //
-///////////////////////////
+/////////////////////////
 
+// Check local storage
 if (localStorage.getItem('sbServerAddress') === null)
     localStorage.setItem('sbServerAddress', '127.0.0.1');
 if (localStorage.getItem('sbServerPort') === null)
@@ -36,44 +37,27 @@ document.getElementById('port').value = localStorage.getItem('sbServerPort');
 let sbServerAddress = document.getElementById('ip').value;
 let sbServerPort = document.getElementById('port').value;
 
-// Deduplication cache
-const handledMsgIds = new Set();
-
 let client = new StreamerbotClient({
     host: sbServerAddress,
     port: sbServerPort,
 
     onConnect: (data) => {
-        console.log(`Streamer.bot successfully connected to ${sbServerAddress}:${sbServerPort}`);
+        console.log(`Streamer.bot successfully connected to ${sbServerAddress}:${sbServerPort}`)
         console.debug(data);
+
         SetConnectionState(true);
     },
 
     onDisconnect: () => {
-        console.error(`Streamer.bot disconnected from ${sbServerAddress}:${sbServerPort}`);
+        console.error(`Streamer.bot disconnected from ${sbServerAddress}:${sbServerPort}`)
         SetConnectionState(false);
     }
 });
 
 client.on('General.Custom', (response) => {
-    const data = response.data;
-
-    // Deduplicate using msgId
-    const msgId = data?.msgId;
-    if (msgId && handledMsgIds.has(msgId)) {
-        console.log(`[Duplicate Skipped] msgId: ${msgId}`);
-        return;
-    }
-
-    if (msgId) {
-        handledMsgIds.add(msgId);
-        // Remove it from cache after 5 minutes to save memory
-        setTimeout(() => handledMsgIds.delete(msgId), 5 * 60 * 1000);
-    }
-
-    console.debug(data);
-    CustomEvent(data);
-});
+    console.debug(response.data);
+    CustomEvent(response.data);
+})
 
 
 
