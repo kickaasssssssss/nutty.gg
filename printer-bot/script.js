@@ -568,6 +568,9 @@ async function CustomEvent(data) {
 
              case ('tikfinity.subscribe'):
             {
+		if (data.msgId === lastMsgId) return; // Ignore duplicate
+        	lastMsgId = data.msgId;
+		    
                 avatarEl.src = ConvertWEBPToPNG(data.profilePictureUrl);
 		const subMonth = parseInt(data.subMonth) || 1;
 
