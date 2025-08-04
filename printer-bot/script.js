@@ -65,7 +65,7 @@ client.on('General.Custom', (response) => {
 ////////////////////
 
 async function CustomEvent(data) {
-    if (data.actionName != 'Printer Bot | Events')
+    if (data.actionName != 'Printer Bot Routine')
         return;
 
     // Get a reference to the template
