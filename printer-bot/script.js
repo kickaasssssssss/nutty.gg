@@ -549,51 +549,30 @@ async function CustomEvent(data) {
             break;
 
         // Custom Code Events
-        case 'CustomCodeEvent': {
-	const eventName = data.triggerCustomCodeEventName;
+            case ('CustomCodeEvent'):
+        {
+            switch (data.triggerCustomCodeEventName) {
+                case ('kickIncomingRaid'):
+                    {
+                        avatarEl.src = ConvertWEBPToPNG(await GetAvatar(data.user, 'kick'));
 
-	switch (eventName) {
-		case 'kickIncomingRaid': {
-			avatarEl.src = ConvertWEBPToPNG(await GetAvatar(data.user, 'kick'));
+                        const messageEl = document.createElement('div');
+                        messageEl.innerHTML = `<b>${data.user}</b><br>is hosting with a party of<br><b>${data.viewers} viewers!</b>`;
 
-			const messageEl = document.createElement('div');
-			messageEl.innerHTML = `
-				<b>${data.user}</b><br>
-				is hosting with a party of<br>
-				<b>${data.viewers} viewers!</b>
-			`.trim();
+                        contentEl.appendChild(messageEl);
 
-			contentEl.appendChild(messageEl);
-			SetPlatformIcon(iconEl, 'kick');
-			break;
-		}
+                        // Set the platform icon
+                        SetPlatformIcon(iconEl, 'kick');
+                    }
+                    break;
+            }
+        }
+        break;
 
-		case 'tikfinity.subscribe': {
-			// Display TikFinity subscription alert
-			const nickname = data.nickname || data.user || data.uniqueId || "Unknown";
-			const subMonth = parseInt(data.subMonth) || 1;
-			const avatarUrl = data.profilePictureUrl || "default-avatar.png";
-
-			avatarEl.src = ConvertWEBPToPNG(avatarUrl);
-
-			const messageEl = document.createElement('div');
-			messageEl.innerHTML = `
-				<b>${nickname}</b><br>
-				just subscribed for<br>
-				<b>${subMonth} month${subMonth > 1 ? 's' : ''}!</b>
-			`.trim();
-
-			contentEl.appendChild(messageEl);
-			SetPlatformIcon(iconEl, 'tiktok'); // Optional: use your own TikFinity or TikTok icon
-			break;
-		}
-
-		default:
-			console.debug(`Unhandled CustomCodeEvent: ${eventName}`);
-			break;
-	}
-	break;
-    }
+    // Don't print any event not excplicitly listed above
+    default:
+        return;
+}
 
     // Set the timestamp
     const { DateTime } = luxon;
@@ -811,5 +790,4 @@ function Connect() {
         client.options.port = document.getElementById('port').value;
         client.connect();
     }
-}
 }
