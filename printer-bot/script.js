@@ -594,23 +594,20 @@ async function CustomEvent(data) {
 	{
     // Only handle gift when combo finishes
     if (data.repeatEnd === true) {
-        avatarEl.src = ConvertWEBPToPNG(data.profilePictureUrl);
-
+        const giftImg = document.createElement('img');
+        giftImg.src = data.giftPictureUrl;
+        giftImg.classList.add('gift-image');
+        contentEl.appendChild(giftImg);
+	    
         const messageEl = document.createElement('div');
         messageEl.innerHTML = `
             <b>${data.nickname}</b><br>
             sent <b>${data.giftName}</b> 
             <span style="font-size: 1.2em;">×${data.repeatCount}</span>
         `;
-
         contentEl.appendChild(messageEl);
 
-        const giftImg = document.createElement('img');
-        giftImg.src = data.giftPictureUrl;
-        giftImg.classList.add('gift-image');
-        contentEl.appendChild(giftImg);
-
-        SetPlatformIcon(iconEl, 'tiktok');
+	    SetPlatformIcon(iconEl, 'tiktok');
     		}
 	}
 	break;
