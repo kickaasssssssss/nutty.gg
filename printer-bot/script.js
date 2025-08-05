@@ -557,8 +557,8 @@ async function CustomEvent(data) {
                 {
 			avatarEl.src = ConvertWEBPToPNG("https://yt3.googleusercontent.com/Zba0nTiNv3ymPhtA5bAK9Kd1bMsxkrBtiX3CTACN2OZCAX6zQ21hg_cOt1PI2YTBWmjy-ITe=s160-c-k-c0x00ffffff-no-rj");
 
-                    const name = data.webhook.data.message_data.customer.name;
-                    const title = data.webhook.data.message_data.items[0].title;
+                    const name = data["webhook.data.message_data.customer.name"];
+                    const title = data["webhook.data.message_data.items[0].title"];
 
                     const messageEl = document.createElement('div');
                     messageEl.innerHTML = `
