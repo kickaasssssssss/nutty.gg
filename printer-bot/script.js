@@ -607,7 +607,7 @@ async function CustomEvent(data) {
        		? parsedUserDetails.profilePictureUrls.find(url => url.includes('.jpeg'))
         		: null;
 
-    		avatarEl.src = ConvertWEBPToPNG(await GetAvatar(jpegUrl));
+    		avatarEl.src = jpegUrl;
 		
 		const subMonth = parseInt(data.subMonth) || 1;
                 const messageEl = document.createElement('div');
@@ -627,7 +627,7 @@ async function CustomEvent(data) {
        		? parsedUserDetails.profilePictureUrls.find(url => url.includes('.jpeg'))
         		: null;
 
-    		avatarEl.src = ConvertWEBPToPNG(await GetAvatar(jpegUrl));
+    		avatarEl.src = jpegUrl;
 		    
 		const messageEl = document.createElement('div');
                 messageEl.innerHTML = `<b>${data.nickname}</b><br>Followed the host!`;
