@@ -600,7 +600,8 @@ async function CustomEvent(data) {
 
              case ('tikfinity.subscribe'):
             {
-		avatarEl.src = data.profilePictureUrl;
+		avatarEl.src = ConvertWEBPToPNG(await GetAvatar(data.profilePictureUrl));
+		//avatarEl.src = data.profilePictureUrl;
 		const subMonth = parseInt(data.subMonth) || 1;
 
                 const messageEl = document.createElement('div');
@@ -613,7 +614,8 @@ async function CustomEvent(data) {
 
 		case ('tikfinity.follow'):
             {
-		avatarEl.src = data.profilePictureUrl;
+		avatarEl.src = ConvertWEBPToPNG(await GetAvatar(data.profilePictureUrl));
+		//avatarEl.src = data.profilePictureUrl;
 		const messageEl = document.createElement('div');
                 messageEl.innerHTML = `<b>${data.nickname}</b><br>Followed the host!`;
 
