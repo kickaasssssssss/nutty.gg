@@ -600,7 +600,13 @@ async function CustomEvent(data) {
 
              case ('tikfinity.subscribe'):
             {
-		const jpegUrl = data.userDetails.profilePictureUrls.find(url => url.includes('.jpeg'));
+		const parsedUserDetails = JSON.parse(data.userDetails);
+    
+    		// Find .jpeg profile picture
+    		const jpegUrl = Array.isArray(parsedUserDetails.profilePictureUrls)
+       		? parsedUserDetails.profilePictureUrls.find(url => url.includes('.jpeg'))
+        		: null;
+
     		avatarEl.src = ConvertWEBPToPNG(await GetAvatar(jpegUrl));
 		
 		const subMonth = parseInt(data.subMonth) || 1;
@@ -614,7 +620,13 @@ async function CustomEvent(data) {
 
 		case ('tikfinity.follow'):
             {
-		const jpegUrl = data.userDetails.profilePictureUrls.find(url => url.includes('.jpeg'));
+		const parsedUserDetails = JSON.parse(data.userDetails);
+    
+    		// Find .jpeg profile picture
+    		const jpegUrl = Array.isArray(parsedUserDetails.profilePictureUrls)
+       		? parsedUserDetails.profilePictureUrls.find(url => url.includes('.jpeg'))
+        		: null;
+
     		avatarEl.src = ConvertWEBPToPNG(await GetAvatar(jpegUrl));
 		    
 		const messageEl = document.createElement('div');
