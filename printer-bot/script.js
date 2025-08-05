@@ -555,19 +555,20 @@ async function CustomEvent(data) {
         switch (data["webhook.event"]) {
             case 'payment.received':
                 {
-			avatarEl.src = ConvertWEBPToPNG("https://yt3.googleusercontent.com/Zba0nTiNv3ymPhtA5bAK9Kd1bMsxkrBtiX3CTACN2OZCAX6zQ21hg_cOt1PI2YTBWmjy-ITe=s160-c-k-c0x00ffffff-no-rj");
+			//avatarEl.src = ConvertWEBPToPNG("https://raw.githubusercontent.com/kickaasssssssss/nutty.gg/main/printer-bot/icons/platforms/lynk_id_logo.png");
+			avatarEl.style.display = 'none'
+                    	const name = data["webhook.data.message_data.customer.name"];
+                    	const title = data["webhook.data.message_data.items[0].title"];
 
-                    const name = data["webhook.data.message_data.customer.name"];
-                    const title = data["webhook.data.message_data.items[0].title"];
-
-                    const messageEl = document.createElement('div');
-                    messageEl.innerHTML = `
+                    	const messageEl = document.createElement('div');
+                    	messageEl.innerHTML = `
                         <b>${name}</b><br>
                         has ordered:<br>
                         <b>${title}</b>
-                    `.trim();
+                   	`.trim();
 
-                    contentEl.appendChild(messageEl);
+                   	 contentEl.appendChild(messageEl);
+			SetPlatformIcon(iconEl, 'lynk_id_logo');
                 }
                 break;
 
