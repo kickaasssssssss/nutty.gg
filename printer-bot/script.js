@@ -548,6 +548,39 @@ async function CustomEvent(data) {
                 contentEl.appendChild(messageEl);
             }
             break;
+		    
+	// Custom Webhook Events
+		case ('StreamerBotCustomWebook'):
+    {
+        switch (data["webhook.event"]) {
+            case 'payment.received':
+                {
+                    const customer = data["webhook.data.message_data.customer"];
+                    const item = data["webhook.data.message_data.items"]?.[0];
+
+                    const name = customer?.name ?? "Anonymous";
+                    const title = item?.title ?? "Unknown Item";
+
+                    const messageEl = document.createElement('div');
+                    messageEl.innerHTML = `
+                        <b>${name}</b><br>
+                        has ordered:<br>
+                        <b>${title}</b>
+                    `.trim();
+
+                    contentEl.appendChild(messageEl);
+
+                    SetPlatformIcon(iconEl, 'mylynk');
+                }
+                break;
+
+            // future webhook.event cases can go here
+            // case 'another.event':
+            //     break;
+       	 }
+    }
+    break;
+
 
         // Custom Code Events
             case ('CustomCodeEvent'):
