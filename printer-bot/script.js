@@ -574,6 +574,8 @@ case ('StreamerBotCustomWebook'):
 
         contentEl.appendChild(messageEl);
         SetPlatformIcon(iconEl, 'lynk_id_logo');
+	iconEl.style.width = '64px';
+    	iconEl.style.height = '64px';
     }
 
     // Case 2: Saweria donation (using data["webhook.type"])
@@ -593,6 +595,8 @@ case ('StreamerBotCustomWebook'):
 
         contentEl.appendChild(messageEl);
         SetPlatformIcon(iconEl, 'saweria_logo');
+	iconEl.style.width = '64px';
+    	iconEl.style.height = '64px';
     }
 
     // Ignore all other events
