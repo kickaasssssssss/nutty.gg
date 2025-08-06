@@ -550,35 +550,54 @@ async function CustomEvent(data) {
             break;
 		    
 	// Custom Webhook Events
-		case ('StreamerBotCustomWebook'):
+case ('StreamerBotCustomWebook'):
 {
-    switch (data["webhook.event"]) {
-        case 'payment.received':
-        {
-            avatarEl.style.display = 'none';
+    // Case 1: payment.received from Lynk ID (using data["webhook.event"])
+    if (data["webhook.event"] === 'payment.received') {
+        avatarEl.style.display = 'none';
 
-            const name = data["webhook.data.message_data.customer.name"];
-            const title = data["webhook.data.message_data.items[0].title"];
-            const qty = data["webhook.data.message_data.items[0].qty"];
-            const price = data["webhook.data.message_data.items[0].price"];
-            const totalItem = data["webhook.data.message_data.totals.totalItem"];
+        const name = data["webhook.data.message_data.customer.name"];
+        const title = data["webhook.data.message_data.items[0].title"];
+        const qty = data["webhook.data.message_data.items[0].qty"];
+        const price = data["webhook.data.message_data.items[0].price"];
+        const totalItem = data["webhook.data.message_data.totals.totalItem"];
 
-	    const formattedPrice = Number(price).toLocaleString('id-ID');
+        const formattedPrice = Number(price).toLocaleString('id-ID');
 
-            const messageEl = document.createElement('div');
-            messageEl.innerHTML = `
-                <b>${name}</b><br>
-                has ordered:<br>
-                <b>${title}</b> × ${qty} (Rp.${formattedPrice})<br>
-                <span>Total Item: ${totalItem}</span>
-            `.trim();
+        const messageEl = document.createElement('div');
+        messageEl.innerHTML = `
+            <b>${name}</b><br>
+            has ordered:<br>
+            <b>${title}</b> <span>×${qty} (Rp.${formattedPrice})</span><br>
+            <span>Total Item: ${totalItem}</span>
+        `.trim();
 
-            contentEl.appendChild(messageEl);
-            SetPlatformIcon(iconEl, 'lynk_id_logo');
-        }
-        break;
+        contentEl.appendChild(messageEl);
+        SetPlatformIcon(iconEl, 'lynk_id_logo');
+    }
 
-        // future webhook.event cases can go here
+    // Case 2: Saweria donation (using data["webhook.type"])
+    else if (data["webhook.type"] === 'donation') {
+        avatarEl.style.display = 'none';
+
+        const name = data["webhook.donator_name"];
+        const amount = data["webhook.amount_raw"];
+        const message = data["webhook.message"];
+        const formattedAmount = Number(amount).toLocaleString('id-ID');
+
+        const messageEl = document.createElement('div');
+        messageEl.innerHTML = `
+            <b>${name}</b> donated <b>Rp.${formattedAmount}</b><br>
+            <i>${message}</i>
+        `.trim();
+
+        contentEl.appendChild(messageEl);
+        SetPlatformIcon(iconEl, 'saweria_logo');
+    }
+
+    // Ignore all other events
+    else {
+        return;
     }
 }
 break;
