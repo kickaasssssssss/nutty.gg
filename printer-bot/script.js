@@ -563,11 +563,13 @@ async function CustomEvent(data) {
             const price = data["webhook.data.message_data.items[0].price"];
             const totalItem = data["webhook.data.message_data.totals.totalItem"];
 
+	    const formattedPrice = Number(price).toLocaleString('id-ID');
+
             const messageEl = document.createElement('div');
             messageEl.innerHTML = `
                 <b>${name}</b><br>
                 has ordered:<br>
-                <b>${title} × ${qty} (Rp${price})</b><br>
+                <b>${title}</b> × ${qty} (Rp.${formattedPrice})<br>
                 <span>Total Item: ${totalItem}</span>
             `.trim();
 
