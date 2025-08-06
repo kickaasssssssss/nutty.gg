@@ -645,6 +645,7 @@ break;
 
 	avatarEl.src = data.giftPictureUrl;
         avatarEl.style.display = 'block';
+	avatarEl.style.margin = '0 auto';
         avatarEl.style.borderRadius = '0';
         
         const messageEl = document.createElement('div');
@@ -652,7 +653,7 @@ break;
             <b>${data.nickname || 'Anonymous'}</b><br>
             sent <b>${data.giftName || 'Unknown Gift'}</b> 
             <span style="font-size: 1.2em;">×${data.repeatCount || 1}</span><br>
-            <small>💎 ${coins} coins</small>
+            <small>&#128142; ${coins} coins</small>
         `;
         contentEl.appendChild(messageEl);
 
