@@ -551,33 +551,35 @@ async function CustomEvent(data) {
 		    
 	// Custom Webhook Events
 		case ('StreamerBotCustomWebook'):
-    {
-        switch (data["webhook.event"]) {
-            case 'payment.received':
-                {
-			//avatarEl.src = ConvertWEBPToPNG("https://raw.githubusercontent.com/kickaasssssssss/nutty.gg/main/printer-bot/icons/platforms/lynk_id_logo.png");
-			avatarEl.style.display = 'none'
-                    	const name = data["webhook.data.message_data.customer.name"];
-                    	const title = data["webhook.data.message_data.items[0].title"];
+{
+    switch (data.webhook?.event) {
+        case 'payment.received':
+        {
+            avatarEl.style.display = 'none';
 
-                    	const messageEl = document.createElement('div');
-                    	messageEl.innerHTML = `
-                        <b>${name}</b><br>
-                        has ordered:<br>
-                        <b>${title}</b>
-                   	`.trim();
+            const name = data.webhook?.data?.message_data?.customer?.name || 'Anonymous';
+            const items = data.webhook?.data?.message_data?.items || [];
+            const firstItem = items.length > 0 ? items[0] : null;
 
-                   	 contentEl.appendChild(messageEl);
-			SetPlatformIcon(iconEl, 'lynk_id_logo');
-                }
-                break;
+            const title = firstItem?.title || 'Unknown Item';
+            const qty = firstItem?.quantity || 1;
+            const price = firstItem?.price || 0;
 
-            // future webhook.event cases can go here
-            // case 'another.event':
-            //     break;
-       	 }
+            const messageEl = document.createElement('div');
+            messageEl.innerHTML = `
+                <b>${name}</b><br>
+                has ordered:<br>
+                <b>${title} (x${qty})</b><br>
+                Price: <b>Rp${price.toLocaleString('id-ID')}</b>
+            `.trim();
+
+            contentEl.appendChild(messageEl);
+            SetPlatformIcon(iconEl, 'lynk_id_logo');
+        }
+        break;
     }
-    break;
+}
+break;
 
 
         // Custom Code Events
@@ -637,25 +639,27 @@ async function CustomEvent(data) {
             }
             break;
 
-	case ('tikfinity.gift'):
-{
-  	 if (data.repeatEnd === true) {
-    // Show gift image instead of profile picture
-    avatarEl.src = data.giftPictureUrl;
+	case 'tikfinity.gift': {
+    	if (data.repeatEnd === true) {
+        var coins = Math.floor(data.repeatCount * data.diamondCount);
 
-    const messageEl = document.createElement('div');
-    messageEl.innerHTML = `
-        <b>${data.nickname}</b><br>
-        sent <b>${data.giftName}</b> 
-        <span style="font-size: 1.2em;">×${data.repeatCount}</span>
-    `;
+	avatarEl.src = data.giftPictureUrl;
+        avatarEl.style.display = 'block';
+        avatarEl.style.borderRadius = '0';
+        
+        const messageEl = document.createElement('div');
+        messageEl.innerHTML = `
+            <b>${data.nickname || 'Anonymous'}</b><br>
+            sent <b>${data.giftName || 'Unknown Gift'}</b> 
+            <span style="font-size: 1.2em;">×${data.repeatCount || 1}</span><br>
+            <small>💎 ${coins} coins</small>
+        `;
+        contentEl.appendChild(messageEl);
 
-    contentEl.appendChild(messageEl);
-
-    SetPlatformIcon(iconEl, 'tiktok');
-   		}
+        SetPlatformIcon(iconEl, 'tiktok');
+    }
+    break;
 }
-break;
 
             }
         }
