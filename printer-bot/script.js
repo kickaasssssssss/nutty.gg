@@ -653,7 +653,7 @@ break;
             <b>${data.nickname || 'Anonymous'}</b><br>
             sent <b>${data.giftName || 'Unknown Gift'}</b> 
             <span style="font-size: 1.2em;">×${data.repeatCount || 1}</span><br>
-            <small>&#128142; ${coins} coins</small>
+            <small>${coins} coins</small>
         `;
         contentEl.appendChild(messageEl);
 
