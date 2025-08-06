@@ -552,36 +552,36 @@ async function CustomEvent(data) {
 	// Custom Webhook Events
 		case ('StreamerBotCustomWebook'):
 {
-    switch (data.webhook?.event) {
+    switch (data["webhook.event"]) {
         case 'payment.received':
         {
             avatarEl.style.display = 'none';
 
-            const name = data.webhook?.data?.message_data?.customer?.name || 'Anonymous';
-            const items = data.webhook?.data?.message_data?.items || [];
-            const firstItem = items.length > 0 ? items[0] : null;
-
-            const title = firstItem?.title || 'Unknown Item';
-            const qty = firstItem?.quantity || 1;
-            const price = firstItem?.price || 0;
+            const name = data["webhook.data.message_data.customer.name"];
+            const title = data["webhook.data.message_data.items[0].title"];
+            const qty = data["webhook.data.message_data.items[0].qty"];
+            const price = data["webhook.data.message_data.items[0].price"];
+            const totalItem = data["webhook.data.message_data.totals.totalItem"];
 
             const messageEl = document.createElement('div');
             messageEl.innerHTML = `
                 <b>${name}</b><br>
                 has ordered:<br>
-                <b>${title} (x${qty})</b><br>
-                Price: <b>Rp${price.toLocaleString('id-ID')}</b>
+                <b>${title} × ${qty} (Rp${price})</b><br>
+                <span>Total Item: ${totalItem}</span>
             `.trim();
 
             contentEl.appendChild(messageEl);
             SetPlatformIcon(iconEl, 'lynk_id_logo');
         }
         break;
+
+        // future webhook.event cases can go here
     }
 }
 break;
 
-
+		    
         // Custom Code Events
             case ('CustomCodeEvent'):
         {
