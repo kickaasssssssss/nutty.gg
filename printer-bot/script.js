@@ -557,7 +557,7 @@ case ('StreamerBotCustomWebook'):
         avatarEl.style.display = 'none';
 
         const name = data["webhook.data.message_data.customer.name"];
-        const items = data["webhook.data.message_data.items"];
+        const items = data["webhook.data.message_data.items"] || [];
         const totalItem = data["webhook.data.message_data.totals.totalItem"];
 
         let itemsHtml = '';
