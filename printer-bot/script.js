@@ -569,8 +569,8 @@ case ('StreamerBotCustomWebook'):
             <b>${name}</b><br>
             has ordered:<br>
             <b>${title}</b> <span>×${qty} (Rp.${formattedPrice})</span><br>
-            <span>Total Item: ${totalItem}</span>
-            <b style="font-size: 0.6em;">Thank you for your donation!</b>
+            <span>Total Item: ${totalItem}</span><br>
+            <b style="font-size: 0.8em;">Thank you for your donation!</b>
         `.trim();
 
         contentEl.appendChild(messageEl);
@@ -592,8 +592,8 @@ case ('StreamerBotCustomWebook'):
         const messageEl = document.createElement('div');
         messageEl.innerHTML = `
             <b>${name}</b> donated <b>Rp.${formattedAmount}</b><br>
-            <i>${message}</i>
-            <b style="font-size: 0.6em;">Thank you for your donation!</b>
+            <i>${message}</i><br>
+            <b style="font-size: 0.8em;">Thank you for your donation!</b>
         `.trim();
 
        contentEl.appendChild(messageEl);
