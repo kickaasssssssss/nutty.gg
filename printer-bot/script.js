@@ -557,14 +557,19 @@ case ('StreamerBotCustomWebook'):
         avatarEl.style.display = 'none';
 
         const name = data["webhook.data.message_data.customer.name"];
-        const items = data.webhook?.data?.message_data?.items || [];
         const totalItem = data["webhook.data.message_data.totals.totalItem"];
 
         let itemsHtml = '';
-        for (const item of items) {
-            const title = item["title"];
-            const qty = item["qty"];
-            const price = item["price"];
+
+        for (let i = 0; i < totalItem; i++) {
+            const titleKey = `webhook.data.message_data.items[${i}].title`;
+            const qtyKey = `webhook.data.message_data.items[${i}].qty`;
+            const priceKey = `webhook.data.message_data.items[${i}].price`;
+
+            const title = data[titleKey] || "Unknown Item";
+            const qty = data[qtyKey] || 1;
+            const price = data[priceKey] || 0;
+
             const formattedPrice = Number(price).toLocaleString('id-ID');
             itemsHtml += `<b>${title}</b> <span>×${qty} (Rp.${formattedPrice})</span><br>`;
         }
