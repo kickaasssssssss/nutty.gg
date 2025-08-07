@@ -572,9 +572,15 @@ case ('StreamerBotCustomWebook'):
             <span>Total Item: ${totalItem}</span>
         `.trim();
 
+        // Add a cute thank you message because you're uwu like that
+            const thankYouEl = document.createElement('div');
+            thankYouEl.innerHTML += `<br><b>Thank you for your purchase!</b>`;
+
+        contentEl.appendChild(thankYouEl);
         contentEl.appendChild(messageEl);
+
         SetPlatformIcon(iconEl, 'lynk_id_logo');
-	iconEl.style.width = '48px';
+	    iconEl.style.width = '48px';
     	iconEl.style.height = '48px';
     }
 
@@ -593,9 +599,15 @@ case ('StreamerBotCustomWebook'):
             <i>${message}</i>
         `.trim();
 
+        // Add a cute thank you message because you're uwu like that
+            const thankYouEl = document.createElement('div');
+            thankYouEl.innerHTML += `<br><b>Thank you for your donation!</b>`;
+
+        contentEl.appendChild(thankYouEl);
         contentEl.appendChild(messageEl);
+
         SetPlatformIcon(iconEl, 'saweria_logo');
-	iconEl.style.width = '48px';
+	    iconEl.style.width = '48px';
     	iconEl.style.height = '48px';
     }
 
