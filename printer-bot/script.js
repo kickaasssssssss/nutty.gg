@@ -553,21 +553,20 @@ async function CustomEvent(data) {
 case ('StreamerBotCustomWebook'):
 {
     // Case 1: payment.received from Lynk ID (using data["webhook.event"])
-    if (data.webhook?.event === 'payment.received') {
+    if (data["webhook.event"] === 'payment.received') {
         avatarEl.style.display = 'none';
 
-        const name = data.webhook.data?.message_data?.customer?.name || "Anonymous";
-        const items = data.webhook.data?.message_data?.items || [];
-        const totalItem = data.webhook.data?.message_data?.totals?.totalItem || items.length;
+        const name = data["webhook.data.message_data.customer.name"];
+        const items = data["webhook.data.message_data.items"];
+        const totalItem = data["webhook.data.message_data.totals.totalItem"];
 
         let itemsHtml = '';
         for (const item of items) {
-            const title = item?.title || "Unknown Item";
-            const qty = item?.qty || 1;
-            const price = item?.price || 0;
+            const title = item["title"];
+            const qty = item["qty"];
+            const price = item["price"];
             const formattedPrice = Number(price).toLocaleString('id-ID');
-
-            itemsHtml += `<b>${title}</b> <span>× ${qty} (Rp ${formattedPrice})</span><br>`;
+            itemsHtml += `<b>${title}</b> <span>×${qty} (Rp.${formattedPrice})</span><br>`;
         }
 
         const messageEl = document.createElement('div');
@@ -578,8 +577,9 @@ case ('StreamerBotCustomWebook'):
             <span>Total Item: ${totalItem}</span>
         `.trim();
 
+        // Add a cute thank you message because you're uwu like that
         const thankYouEl = document.createElement('div');
-        thankYouEl.innerHTML = `<br><b>Thank you for your purchase!</b>`;
+        thankYouEl.innerHTML += `<br><b>Thank you for your purchase!</b>`;
 
         contentEl.appendChild(thankYouEl);
         contentEl.appendChild(messageEl);
