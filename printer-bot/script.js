@@ -553,31 +553,40 @@ async function CustomEvent(data) {
 case ('StreamerBotCustomWebook'):
 {
     // Case 1: payment.received from Lynk ID (using data["webhook.event"])
-    if (data["webhook.event"] === 'payment.received') {
+    if (data.webhook?.event === 'payment.received') {
         avatarEl.style.display = 'none';
 
-        const name = data["webhook.data.message_data.customer.name"];
-        const title = data["webhook.data.message_data.items[0].title"];
-        const qty = data["webhook.data.message_data.items[0].qty"];
-        const price = data["webhook.data.message_data.items[0].price"];
-        const totalItem = data["webhook.data.message_data.totals.totalItem"];
+        const name = data.webhook.data?.message_data?.customer?.name || "Anonymous";
+        const items = data.webhook.data?.message_data?.items || [];
+        const totalItem = data.webhook.data?.message_data?.totals?.totalItem || items.length;
 
-        const formattedPrice = Number(price).toLocaleString('id-ID');
+        let itemsHtml = '';
+        for (const item of items) {
+            const title = item?.title || "Unknown Item";
+            const qty = item?.qty || 1;
+            const price = item?.price || 0;
+            const formattedPrice = Number(price).toLocaleString('id-ID');
+
+            itemsHtml += `<b>${title}</b> <span>× ${qty} (Rp ${formattedPrice})</span><br>`;
+        }
 
         const messageEl = document.createElement('div');
         messageEl.innerHTML = `
             <b>${name}</b><br>
             has ordered:<br>
-            <b>${title}</b> <span>×${qty} (Rp.${formattedPrice})</span><br>
-            <span>Total Item: ${totalItem}</span><br>
-            <b style="font-size: 0.8em;">Thank you for your donation!</b>
+            ${itemsHtml}
+            <span>Total Item: ${totalItem}</span>
         `.trim();
 
+        const thankYouEl = document.createElement('div');
+        thankYouEl.innerHTML = `<br><b>Thank you for your purchase!</b>`;
+
+        contentEl.appendChild(thankYouEl);
         contentEl.appendChild(messageEl);
 
         SetPlatformIcon(iconEl, 'lynk_id_logo');
-	    iconEl.style.width = '48px';
-    	iconEl.style.height = '48px';
+        iconEl.style.width = '48px';
+        iconEl.style.height = '48px';
     }
 
     // Case 2: Saweria donation (using data["webhook.type"])
@@ -593,10 +602,14 @@ case ('StreamerBotCustomWebook'):
         messageEl.innerHTML = `
             <b>${name}</b> donated <b>Rp.${formattedAmount}</b><br>
             <i>${message}</i><br>
-            <b style="font-size: 0.8em;">Thank you for your donation!</b>
         `.trim();
 
+        // Add a cute thank you message because you're uwu like that
+        const thankYouEl = document.createElement('div');
+        thankYouEl.innerHTML += `<b style="font-size: 0.8em;">Thank you for your donation!</b>`;
+
        contentEl.appendChild(messageEl);
+       contentEl.appendChild(thankYouEl);
 
         SetPlatformIcon(iconEl, 'saweria_logo');
 	    iconEl.style.width = '48px';
