@@ -570,13 +570,9 @@ case ('StreamerBotCustomWebook'):
             has ordered:<br>
             <b>${title}</b> <span>×${qty} (Rp.${formattedPrice})</span><br>
             <span>Total Item: ${totalItem}</span>
+            <b style="font-size: 0.6em;">Thank you for your donation!</b>
         `.trim();
 
-        // Add a cute thank you message because you're uwu like that
-            const thankYouEl = document.createElement('div');
-            thankYouEl.innerHTML += `<br><b>Thank you for your purchase!</b>`;
-
-        contentEl.appendChild(thankYouEl);
         contentEl.appendChild(messageEl);
 
         SetPlatformIcon(iconEl, 'lynk_id_logo');
@@ -597,14 +593,10 @@ case ('StreamerBotCustomWebook'):
         messageEl.innerHTML = `
             <b>${name}</b> donated <b>Rp.${formattedAmount}</b><br>
             <i>${message}</i>
+            <b style="font-size: 0.6em;">Thank you for your donation!</b>
         `.trim();
 
-        // Add a cute thank you message because you're uwu like that
-            const thankYouEl = document.createElement('div');
-            thankYouEl.innerHTML += `<br><b>Thank you for your donation!</b>`;
-
-        contentEl.appendChild(thankYouEl);
-        contentEl.appendChild(messageEl);
+       contentEl.appendChild(messageEl);
 
         SetPlatformIcon(iconEl, 'saweria_logo');
 	    iconEl.style.width = '48px';
