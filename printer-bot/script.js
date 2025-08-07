@@ -584,10 +584,10 @@ case ('StreamerBotCustomWebook'):
 
         // Add a cute thank you message because you're uwu like that
         const thankYouEl = document.createElement('div');
-        thankYouEl.innerHTML += `<br><b>Thank you for your purchase!</b>`;
+        thankYouEl.innerHTML += `<b style="font-size: 0.8em;">Thank you for your purchase!</b>`;
 
-        contentEl.appendChild(thankYouEl);
         contentEl.appendChild(messageEl);
+        contentEl.appendChild(thankYouEl);
 
         SetPlatformIcon(iconEl, 'lynk_id_logo');
         iconEl.style.width = '48px';
