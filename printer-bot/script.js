@@ -678,7 +678,7 @@ break;
 
     		avatarEl.src = jpegUrl;
 		    
-		const messageEl = document.createElement('div');
+		    const messageEl = document.createElement('div');
                 messageEl.innerHTML = `<b>${data.nickname}</b><br>Followed the host!`;
 
                 contentEl.appendChild(messageEl);
@@ -690,10 +690,13 @@ break;
     	if (data.repeatEnd === true) {
         var coins = Math.floor(data.repeatCount * data.diamondCount);
 
-	avatarEl.src = data.giftPictureUrl;
-        avatarEl.style.display = 'block';
-	avatarEl.style.margin = '0 auto';
-        avatarEl.style.borderRadius = '0';
+        avatarEl.style.display = 'none';
+
+        const giftEl = document.createElement('div');
+	    giftEl.src = data.giftPictureUrl;
+        giftEl.style.display = 'block';
+	    giftEl.style.margin = '0 auto';
+        giftEl.style.borderRadius = '0';
         
         const messageEl = document.createElement('div');
         messageEl.innerHTML = `
@@ -702,6 +705,8 @@ break;
             <span style="font-size: 1.2em;">×${data.repeatCount || 1}</span><br>
             <small>${coins} coins</small>
         `;
+
+        headerEl.appendChild(giftEl);
         contentEl.appendChild(messageEl);
 
         SetPlatformIcon(iconEl, 'tiktok');
