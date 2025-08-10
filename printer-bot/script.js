@@ -692,7 +692,7 @@ break;
 
         avatarEl.style.display = 'none';
 
-        const giftEl = document.createElement('div');
+        const giftEl = document.createElement('img');
 	    giftEl.src = data.giftPictureUrl;
         giftEl.style.display = 'block';
 	    giftEl.style.margin = '0 auto';
