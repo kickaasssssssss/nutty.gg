@@ -704,7 +704,7 @@ break;
         messageEl.innerHTML = `
             <b>${data.nickname || 'Anonymous'}</b><br>
             sent <b>${data.giftName || 'Unknown Gift'}</b> 
-            <span style="font-size: 1.2em;">×${data.repeatCount || 1}</span><br>
+            <span style="font-size: 1em;">×${data.repeatCount || 1}</span><br>
             <small>${coins} coins</small>
         `;
 
