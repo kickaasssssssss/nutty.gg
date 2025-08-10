@@ -697,7 +697,8 @@ break;
         giftEl.style.display = 'block';
 	    giftEl.style.margin = '0 auto';
         giftEl.style.borderRadius = '0';
-        giftEl.style.maxWidth = '100%'; 
+        giftEl.style.width = '6em';
+        giftEl.style.height = '6em';
         
         const messageEl = document.createElement('div');
         messageEl.innerHTML = `
