@@ -552,7 +552,7 @@ async function CustomEvent(data) {
 	// Custom Webhook Events
 case ('StreamerBotCustomWebook'):
 {
-    // Case 1: payment.received from Lynk ID (using data["webhook.event"])
+    // Case 1: payment.received from Lynk ID
     if (data["webhook.event"] === 'payment.received') {
         avatarEl.style.display = 'none';
 
@@ -560,7 +560,6 @@ case ('StreamerBotCustomWebook'):
         const totalItem = data["webhook.data.message_data.totals.totalItem"];
 
         let itemsHtml = '';
-
         for (let i = 0; i < totalItem; i++) {
             const titleKey = `webhook.data.message_data.items[${i}].title`;
             const qtyKey = `webhook.data.message_data.items[${i}].qty`;
@@ -582,7 +581,6 @@ case ('StreamerBotCustomWebook'):
             <span>Total Item: ${totalItem}</span>
         `.trim();
 
-        // Add a cute thank you message because you're uwu like that
         const thankYouEl = document.createElement('div');
         thankYouEl.innerHTML += `<b style="font-size: 0.8em;">Thank you for your purchase!</b>`;
 
@@ -594,7 +592,7 @@ case ('StreamerBotCustomWebook'):
         iconEl.style.height = '48px';
     }
 
-    // Case 2: Saweria donation (using data["webhook.type"])
+    // Case 2: Saweria donation
     else if (data["webhook.type"] === 'donation') {
         avatarEl.style.display = 'none';
 
@@ -609,16 +607,44 @@ case ('StreamerBotCustomWebook'):
             <i>${message}</i><br>
         `.trim();
 
-        // Add a cute thank you message because you're uwu like that
         const thankYouEl = document.createElement('div');
         thankYouEl.innerHTML += `<b style="font-size: 0.8em;">Thank you for your donation!</b>`;
 
-       contentEl.appendChild(messageEl);
-       contentEl.appendChild(thankYouEl);
+        contentEl.appendChild(messageEl);
+        contentEl.appendChild(thankYouEl);
 
         SetPlatformIcon(iconEl, 'saweria_logo');
-	    iconEl.style.width = '48px';
-    	iconEl.style.height = '48px';
+        iconEl.style.width = '48px';
+        iconEl.style.height = '48px';
+    }
+
+    // Case 3: Tako donation (webhook.type = "alert" from Tako)
+    else if (data["webhook.type"] === 'alert') {
+        avatarEl.style.display = 'none';
+
+        const name = data["webhook.gifterName"] || "Anonymous";
+        const amount = data["webhook.amount"] || 0;
+        const message = data["webhook.message"] || "";
+        const gifUrl = data["webhook.gifUrl"] || "";
+        const formattedAmount = Number(amount).toLocaleString('id-ID');
+
+        const messageEl = document.createElement('div');
+        messageEl.innerHTML = `
+            <b>${name}</b> sent donation from Tako<br>
+            <b>Rp.${formattedAmount}</b><br>
+            <i>${message}</i><br>
+            ${gifUrl ? `<img src="${gifUrl}" style="max-width:100px; border-radius:8px; margin-top:4px;">` : ""}
+        `.trim();
+
+        const thankYouEl = document.createElement('div');
+        thankYouEl.innerHTML += `<b style="font-size: 0.8em;">Thank you for your support!</b>`;
+
+        contentEl.appendChild(messageEl);
+        contentEl.appendChild(thankYouEl);
+
+        SetPlatformIcon(iconEl, 'tako'); 
+        iconEl.style.width = '48px';
+        iconEl.style.height = '48px';
     }
 
     // Ignore all other events
@@ -627,6 +653,7 @@ case ('StreamerBotCustomWebook'):
     }
 }
 break;
+
 
 		    
         // Custom Code Events
