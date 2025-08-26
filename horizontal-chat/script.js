@@ -1580,17 +1580,35 @@ async function TikTokFollow(data) {
 	ShowAlert(message, 'tiktok');
 }
 
+// Store last trigger times per userId
+const shareCooldowns = {};
+const userCooldownSeconds = 120; // ⏳ cooldown per user
+
 async function TikTokShare(data) {
 	if (!showTikTokShare)
 		return;
-	
+
+	const userId = data.userId; // ✅ safer than nickname
 	const username = data.nickname;
-	//const avatarImg = `<img src="${data.profilePictureUrl}" class="platform avatar-rounded"/>`;
+	const now = Date.now();
+
+	// Check cooldown
+	if (shareCooldowns[userId] && (now - shareCooldowns[userId]) < userCooldownSeconds * 1000) {
+		console.log(`⏳ ${username} (${userId}) still in cooldown, skipping share alert.`);
+		return;
+	}
+
+	// Save new timestamp
+	shareCooldowns[userId] = now;
+
+	// Avatar and message
 	const avatarImg = `<img src="${data.profilePictureUrl}" class="avatar"/>`;
 	const message = `${avatarImg} ${username} shared the live!`;
 
+	// Show the alert
 	ShowAlert(message, 'tiktok');
 }
+
 
 //////////////////////
 // HELPER FUNCTIONS //
