@@ -1588,7 +1588,7 @@ async function TikTokShare(data) {
 	if (!showTikTokShare)
 		return;
 
-	const userId = data.userId; // ✅ safer than nickname
+	const userId = data.uniqueId; // ✅ safer than nickname
 	const username = data.nickname;
 	const now = Date.now();
 
