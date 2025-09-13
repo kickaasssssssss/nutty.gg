@@ -2679,6 +2679,7 @@ function TikTokFollow(data) {
 	AddMessageItem(instance, data.msgId, 'tiktok', data.userId);
 }
 
+// test verified
 
 function TikTokLikes(data) {
 	if (!showTikTokLikes)
