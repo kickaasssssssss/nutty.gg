@@ -714,23 +714,42 @@ break;
             break;
 
 	case 'tikfinity.gift': {
-    	if (data.repeatEnd === true) {
+    if (data.repeatEnd === true) {
         var coins = Math.floor(data.repeatCount * data.diamondCount);
 
         avatarEl.style.display = 'none';
 
+        const giftUrl =
+            data.giftPictureUrl ||
+            data.gift?.giftPictureUrl ||
+            data.data?.giftPictureUrl ||
+            '';
+
         const giftEl = document.createElement('img');
-	    giftEl.src = data.giftPictureUrl;
+        giftEl.src = giftUrl;
+
+        giftEl.onload = () => {
+            console.log('Gift image loaded:', giftUrl);
+        };
+
+        giftEl.onerror = () => {
+            console.error('Gift image failed:', giftUrl);
+
+            // fallback to avatar if image fails
+            giftEl.src = data.profilePictureUrl || '';
+        };
+
         giftEl.style.display = 'block';
-	    giftEl.style.margin = '0 auto';
+        giftEl.style.margin = '0 auto';
         giftEl.style.borderRadius = '0';
         giftEl.style.width = '6em';
         giftEl.style.height = '6em';
-        
+        giftEl.style.objectFit = 'contain';
+
         const messageEl = document.createElement('div');
         messageEl.innerHTML = `
             <b>${data.nickname || 'Anonymous'}</b><br>
-            sent <b>${data.giftName || 'Unknown Gift'}</b> 
+            sent <b>${data.giftName || 'Unknown Gift'}</b>
             <span style="font-size: 1em;">×${data.repeatCount || 1}</span><br>
             <small>${coins} coins</small>
         `;
